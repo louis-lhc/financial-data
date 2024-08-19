@@ -17,7 +17,7 @@ def get(provider, instrument, year, price_calculation='close', time_group=None, 
         price_data = pd.DataFrame()
         csv_files = glob.glob('{0}/currencies/oanda/{1}/{2}/*.csv'.format(data_dir, instrument, year))
         for csv_file in csv_files:
-            price_data = price_data.append(pd.read_csv(csv_file, index_col=0))
+            price_data = pd.concat([price_data, pd.read_csv(csv_file, index_col=0)])
 
     elif provider == 'kraken':
         filename = '{0}/cryptocurrencies/kraken/{1}/{2}.csv'.format(data_dir, instrument, year)
